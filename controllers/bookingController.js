@@ -8,7 +8,6 @@ const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getCheckoutSession = catchAsync(async (req, res) => {
-  console.log('checkoutSession', req.params.tourId); // TEST
   // 1) Get tour data from collection
   const tour = await Tour.findById(req.params.tourId);
 
@@ -58,8 +57,3 @@ exports.createBooking = factory.createOne(Booking);
 exports.getBookings = factory.getOne(Booking);
 exports.updateBooking = factory.updateOne(Booking);
 exports.deleteBooking = factory.deleteOne(Booking);
-
-// exports.createUserBooking =
-// exports.getUserBooking =
-// exports.updateUserBooking =
-// exports.deleteUserBooking =
