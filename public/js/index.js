@@ -1,9 +1,7 @@
 /* eslint-disable */
-import 'core-js/stable';
-import 'regenerator-runtime/runtime.js';
 
 import { login, logout } from './login';
-import { updateSettings, previewPhoto } from './updateSettings';
+import { updateSettings } from './updateSettings';
 import { displayMap } from './leaflet';
 import { bookTour } from './stripe';
 
