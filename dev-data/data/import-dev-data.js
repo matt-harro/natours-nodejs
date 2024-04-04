@@ -7,8 +7,6 @@ const User = require('./../../models/userModel');
 
 dotenv.config({ path: './config.env' });
 
-console.log(process.env); // TEST
-
 const DB = process.env.DATABASE.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD

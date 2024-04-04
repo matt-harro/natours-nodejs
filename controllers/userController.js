@@ -33,7 +33,7 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
-  console.log('resizeUserPhoto', req.file); // TEST
+  // console.log('resizeUserPhoto', req.file); // TEST
   req.file.filename = `user-${req.user._id}-${Date.now()}.jpeg`;
 
   // resize to 'square' based on file width and height. Max 500x500
@@ -48,7 +48,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 
   // If not a 'square' and one dimension is smaller than 500
   // resize both to the smallest dimension
-  if ((width != height && width < 500) || height < 500) {
+  if ((width !== height && width < 500) || height < 500) {
     if (width < height) {
       height = width;
     }

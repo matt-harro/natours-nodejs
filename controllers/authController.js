@@ -13,7 +13,7 @@ const signToken = id => {
 };
 
 const createSendToken = (user, statusCode, res) => {
-  console.log('createSendToken', user); // TEST
+  // console.log('createSendToken', user); // TEST
   const token = signToken(user._id);
   const cookieOptions = {
     expires: new Date(
@@ -46,14 +46,13 @@ exports.signup = catchAsync(async (req, res, next) => {
   });
 
   const url = `${req.protocol}://${req.hostname}/me}`;
-  const email = await new Email(newUser, url).sendWelcome();
-  console.log('email', email); // TEST
+  await new Email(newUser, url).sendWelcome();
 
   createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
-  console.log('login'); // TEST
+  // console.log('login'); // TEST
   const { email, password } = req.body;
 
   // 1) Check if email and password exist

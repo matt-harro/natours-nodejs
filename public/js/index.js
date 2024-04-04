@@ -58,11 +58,6 @@ if (userDataFormEl) {
     form.append('email', document.querySelector('#email').value);
     form.append('photo', document.querySelector('#photo').files[0]);
 
-    // Display Form the values
-    for (const value of form.values()) {
-      console.log(value);
-    }
-
     const isSuccessful = await updateSettings(form, 'data');
 
     if (isSuccessful && userPhotoUrl) {
@@ -82,8 +77,6 @@ if (passwordFormEl) {
     const passwordCurrent = document.querySelector('#password-current').value;
     const password = document.querySelector('#password').value;
     const passwordConfirm = document.querySelector('#password-confirm').value;
-
-    console.log(passwordCurrent, password, passwordConfirm); // TEST
 
     await updateSettings(
       { passwordCurrent, password, passwordConfirm },
