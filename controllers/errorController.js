@@ -7,7 +7,6 @@ const handleCastErrorDB = err => {
 
 const handleDuplicateFieldsDB = err => {
   const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-  console.log(value);
 
   const message = `Duplicate field value: ${value}. Please use another value!`;
   return new AppError(message, 400);
@@ -92,20 +91,15 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, req, res);
   } else if (process.env.NODE_ENV === 'production') {
-    // console.log(err.propertyIsEnumerable('message')); // false
-    // console.log(Object.keys(err)); // [ 'statusCode', 'status', 'isOperational' ]
-    // console.log(err.message); // 'Couldn't find a tour with that name'
-    // console.log(err['message']); // 'Couldn't find a tour with that name'
-
-    let allPropertiesArray = Object.getOwnPropertyNames(err);
+    const allPropertiesArray = Object.getOwnPropertyNames(err);
     let error = {};
-    for (const prop of allPropertiesArray) {
-      error[prop] = err[prop];
-    }
 
-    // console.log(Object.getOwnPropertyNames(err)); // [ 'stack', 'message', 'statusCode', 'status', 'isOperational' ]
-    // console.log('message' in err); // true
-    // console.log('message' in error); // false
+    allPropertiesArray.forEach(prop => {
+      error[prop] = err[prop];
+    });
+    // for (const prop of allPropertiesArray) {
+    //   error[prop] = err[prop];
+    // }
 
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
