@@ -13,7 +13,6 @@ export const useFetch = async (url, uploadData = null) => {
       : fetch(url);
 
     const res = await Promise.race([req, timeout(REQUEST_TIMEOUT_SEC)]);
-    console.log('useFetch', res); // TEST
     const data = await res.json();
 
     if (!res.ok) {

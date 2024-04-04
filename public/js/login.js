@@ -20,11 +20,9 @@ export const login = async (email, password) => {
 export const logout = async () => {
   try {
     const res = await useFetch('/api/v1/users/logout');
-    console.log(res); // TEST
 
     if (res.status === 'success') location.assign('/');
   } catch (err) {
     showAlert('error', 'Logout unsuccessful, please try again!');
-    console.error(err); // TEST
   }
 };
