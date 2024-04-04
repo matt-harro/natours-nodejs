@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm install",
+  "framework": "other"
+  // "rewrites": [{ "source": "/*", "destination": "/server.js" }]
+}
